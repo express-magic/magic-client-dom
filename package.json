@@ -1,0 +1,30 @@
+{
+  "name": "magic-client-dom",
+  "version": "0.0.1",
+  "description": "client side dom manipulation utilities",
+  "author": "Jascha Ehrenreich <jascha@jaeh.at>",
+  "license": "AGPL",
+  "main": "index.js",
+  "scripts": {
+    "setup": "bin/install",
+    "clean": "bin/clean",
+    "prepub": "bin/build",
+    "release": "bin/release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jaeh/magic-client-dom"
+  },
+  "bugs": {
+    "url": "https://github.com/jaeh/magic-client-dom/issues"
+  },
+  "homepage": "https://github.com/jaeh/magic-client-dom",
+  "dependencies": {
+    "is": "^3.0.1",
+    "magic-client-utils": "git://github.com/express-magic/magic-client-utils"
+  },
+  "devDependencies": {
+    "babelify": "^5.0.4",
+    "browserify": "^9.0.3"
+  }
+}

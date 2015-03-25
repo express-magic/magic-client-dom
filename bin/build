@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo 'browserify and babelify main app'
+node_modules/.bin/browserify \
+  src/ \
+  --outfile ./index.js \
+  -t babelify \
+;

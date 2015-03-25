@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo 'npm run prepub'
+npm run prepub
+
+echo 'publishing via npm'
+npm publish ./

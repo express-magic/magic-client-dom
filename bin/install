@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo 'install npm dependencies'
+npm install --production
