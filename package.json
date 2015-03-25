@@ -21,7 +21,8 @@
   "homepage": "https://github.com/jaeh/magic-client-dom",
   "dependencies": {
     "is": "^3.0.1",
-    "magic-client-utils": "git://github.com/express-magic/magic-client-utils"
+    "magic-client-utils": "git://github.com/express-magic/magic-client-utils",
+    "magic-loops": "git://github.com/express-magic/magic-loops"
   },
   "devDependencies": {
     "babelify": "^5.0.4",

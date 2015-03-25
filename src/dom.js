@@ -1,4 +1,4 @@
-import {each} from 'magic-client-utils';
+import {each} from 'magic-loops';
 import is from 'is';
 
 export var dom = {
