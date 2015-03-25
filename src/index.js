@@ -98,9 +98,10 @@ export var dom = {
     }
     findParent(ele.parentNode, type);
   }
-, add: this.append
-, rm: this.remove
-, parentNode: this.findParent
 };
+
+dom.add        = this.append;
+dom.rm         = this.remove;
+dom.parentNode = this.findParent;
 
 export default dom;

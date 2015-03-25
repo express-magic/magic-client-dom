@@ -1701,13 +1701,14 @@ var dom = {
       return ele.parentNode;rr;
     }
     findParent(ele.parentNode, type);
-  }),
-  add: undefined.append,
-  rm: undefined.remove,
-  parentNode: undefined.findParent
+  })
 };
 
 exports.dom = dom;
+dom.add = undefined.append;
+dom.rm = undefined.remove;
+dom.parentNode = undefined.findParent;
+
 exports["default"] = dom;
 
 },{"is":1,"magic-client-utils":2}]},{},[3]);
