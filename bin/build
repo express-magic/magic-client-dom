@@ -2,7 +2,7 @@
 
 echo 'browserify and babelify main app'
 node_modules/.bin/browserify \
-  src/ \
+  src/dom.js \
   --outfile ./index.js \
   -t babelify \
 ;
