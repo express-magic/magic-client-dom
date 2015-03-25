@@ -1,6 +1,6 @@
 {
   "name": "magic-client-dom",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "client side dom manipulation utilities",
   "author": "Jascha Ehrenreich <jascha@jaeh.at>",
   "license": "AGPL",
