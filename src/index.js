@@ -100,8 +100,8 @@ export var dom = {
   }
 };
 
-dom.add        = this.append;
-dom.rm         = this.remove;
-dom.parentNode = this.findParent;
+dom.add        = dom.append;
+dom.rm         = dom.remove;
+dom.parentNode = dom.findParent;
 
 export default dom;

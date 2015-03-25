@@ -1705,9 +1705,9 @@ var dom = {
 };
 
 exports.dom = dom;
-dom.add = undefined.append;
-dom.rm = undefined.remove;
-dom.parentNode = undefined.findParent;
+dom.add = dom.append;
+dom.rm = dom.remove;
+dom.parentNode = dom.findParent;
 
 exports["default"] = dom;
 
