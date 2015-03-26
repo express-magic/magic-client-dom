@@ -11,21 +11,20 @@
     "prepub": "bin/build",
     "release": "bin/release"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:jaeh/magic-client-dom"
-  },
-  "bugs": {
-    "url": "https://github.com/jaeh/magic-client-dom/issues"
-  },
-  "homepage": "https://github.com/jaeh/magic-client-dom",
   "dependencies": {
     "is": "^3.0.1",
-    "magic-client-utils": "git://github.com/express-magic/magic-client-utils",
-    "magic-loops": "git://github.com/express-magic/magic-loops"
+    "magic-loops": "git+https://github.com/express-magic/magic-loops"
   },
   "devDependencies": {
     "babelify": "^5.0.4",
     "browserify": "^9.0.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/express-magic/magic-client-dom"
+  },
+  "bugs": {
+    "url": "https://github.com/jaeh/magic-client-dom/issues"
+  },
+  "homepage": "https://github.com/jaeh/magic-client-dom"  
 }
