@@ -12,8 +12,8 @@
     "release": "bin/release"
   },
   "dependencies": {
-    "is": "^3.0.1",
-    "magic-loops": "git+https://github.com/express-magic/magic-loops"
+    "magic-loops": "git+https://github.com/express-magic/magic-loops",
+    "magic-types": "git://github.com/express-magic/magic-types"
   },
   "devDependencies": {
     "babelify": "^5.0.4",
@@ -26,5 +26,5 @@
   "bugs": {
     "url": "https://github.com/jaeh/magic-client-dom/issues"
   },
-  "homepage": "https://github.com/jaeh/magic-client-dom"  
+  "homepage": "https://github.com/jaeh/magic-client-dom"
 }

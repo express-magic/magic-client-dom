@@ -1,6 +1,33 @@
 import {each} from 'magic-loops';
 import is from 'is';
 
+function appendEle (parent, ele) {
+  var eleIsValid = ele && is.fn(ele.setAttribute)
+  , parentIsValid = parent && is.fn(parent.appendChild)
+  ;
+  if ( eleIsValid && parentIsValid ) {
+    return parent.appendChild(ele);
+  }
+  return false;
+}
+
+function removeEle(ele) {
+  if (ele && ele.parentNode && is.fn(ele.parentNode.removeChild) ) {
+    ele.parentNode.removeChild(ele);
+  }
+}
+
+function findParentEle(ele, type=false) {
+  console.log(`find parent for ele ${ele} and type ${type}`);
+  if ( ! ele || ! ele.parentNode || ! type  ) {
+    return false;
+  }
+  if ( compareType(ele.parentNode, type) ) {
+    return ele.parentNode;rr
+  }
+  findParent(ele.parentNode, type);
+}
+
 export var dom = {
   prepend (parent, ele) {
     var eleIsValid = ele && is.fn(ele.setAttribute)
@@ -8,22 +35,6 @@ export var dom = {
     ;
     if ( eleIsValid && parentIsValid ) {
       return parent.insertBefore(ele, parent.firstChild);
-    }
-  }
-
-, append (parent, ele) {
-    var eleIsValid = ele && is.fn(ele.setAttribute)
-    , parentIsValid = parent && is.fn(parent.appendChild)
-    ;
-    if ( eleIsValid && parentIsValid ) {
-      return parent.appendChild(ele);
-    }
-    return false;
-  }
-
-, remove(ele) {
-    if (ele && ele.parentNode && is.fn(ele.parentNode.removeChild) ) {
-      ele.parentNode.removeChild(ele);
     }
   }
 
@@ -87,22 +98,14 @@ export var dom = {
       return false;
     } 
   }
+  
+, append    : appendEle
+, add       : appendEle
+, rm        : removeEle
+, remove    : removeEle
+, findParent: findParentEle
+, parentNode: findParentEle
 
-, findParent(ele, type=false) {
-    console.log(`find parent for ele ${ele} and type ${type}`);
-    if ( ! ele || ! ele.parentNode || ! type  ) {
-      return false;
-    }
-    if ( compareType(ele.parentNode, type) ) {
-      return ele.parentNode;rr
-    }
-    findParent(ele.parentNode, type);
-  }
 };
-
-
-dom.add        = dom.append;
-dom.rm         = dom.remove;
-dom.parentNode = dom.findParent;
 
 export default dom;
