@@ -1,9 +1,9 @@
 import {each} from 'magic-loops';
-import is from 'is';
+import {isF} from 'magic-types';
 
-function appendEle (parent, ele) {
-  var eleIsValid = ele && is.fn(ele.setAttribute)
-  , parentIsValid = parent && is.fn(parent.appendChild)
+export function append (parent, ele) {
+  var eleIsValid = ele && isF(ele.setAttribute)
+  , parentIsValid = parent && isF(parent.appendChild)
   ;
   if ( eleIsValid && parentIsValid ) {
     return parent.appendChild(ele);
@@ -11,101 +11,129 @@ function appendEle (parent, ele) {
   return false;
 }
 
-function removeEle(ele) {
-  if (ele && ele.parentNode && is.fn(ele.parentNode.removeChild) ) {
+export function remove(ele) {
+  if (ele && ele.parentNode && isF(ele.parentNode.removeChild) ) {
     ele.parentNode.removeChild(ele);
   }
 }
 
-function findParentEle(ele, type=false) {
-  console.log(`find parent for ele ${ele} and type ${type}`);
-  if ( ! ele || ! ele.parentNode || ! type  ) {
+export function parentNode(ele, type) {
+  console.log('called findparentEle');
+  var par = ele.parentNode;
+  if ( ! par || ! type  ) {
     return false;
   }
-  if ( compareType(ele.parentNode, type) ) {
-    return ele.parentNode;rr
+  console.log('before compareType');
+  if ( compareType(par, type) ) {
+    return par;
   }
-  findParent(ele.parentNode, type);
+  console.log('before recursive');
+  return findParentEle(par, type);
 }
 
-export var dom = {
-  prepend (parent, ele) {
-    var eleIsValid = ele && is.fn(ele.setAttribute)
-    , parentIsValid = parent && is.fn(parent.insertBefore)
-    ;
-    if ( eleIsValid && parentIsValid ) {
-      return parent.insertBefore(ele, parent.firstChild);
-    }
+export function prepend (parent, ele) {
+  var eleIsValid = ele && isF(ele.setAttribute)
+  , parentIsValid = parent && isF(parent.insertBefore)
+  ;
+  if ( eleIsValid && parentIsValid ) {
+    return parent.insertBefore(ele, parent.firstChild);
   }
+}
 
-, create(ele) {
+export function create(ele) {
     var d = document
-    , docIsValid = d && is.fn(d.createElement)
+    , docIsValid = d && isF(d.createElement)
     ;
     if ( docIsValid ) {
       return document.createElement(ele);
     }
   }
 
-, id(ele, val) {
-    if ( ! ele || ! is.fn(ele.setAttribute) ) {
-      throw new Error('dom.id called without arguments, dom.id(ele, text)');
-    }
-    if ( ! val ) {
-      return ele.getAttribute('id');
-    }
-    if ( isStr(val) ) {
-      ele.setAttribute('id', val);
-      return ele.getAttribute('id');
-    }
+export function id(ele, val) {
+  if ( ! ele || ! isF(ele.setAttribute) ) {
+    throw new Error('dom.id called without arguments, dom.id(ele, text)');
   }
-
-, class: {
-    toggle(ele, name) {
-      if ( hasClass(ele, name) ) {
-        rmClass(ele, name);
-        return false;
-      } else {
-        addClass(ele, name);
-        return true;
-      }
-    }
-
-  , has(ele, name) {
-      return ele.className.indexOf(name) > -1;
-    }
-
-  , add(ele, name) {
-      ele.classList.add(name);
-    }
-
-  , remove(ele, name) {
-      ele.classList.remove(name);
-    }
+  if ( ! val ) {
+    return ele.getAttribute('id');
   }
+  if ( isStr(val) ) {
+    ele.setAttribute('id', val);
+    return ele.getAttribute('id');
+  }
+}
 
-, compareType(ele, type=false) {
-    if (type ) {
-      if ( isStr(type) ) {
-        return ele.parentNode.tagName.toLowerCase() === type.toLowerCase();
-      } else if ( isArr(type) || isObj(type) ) {
-        each(type, (t) => {
-          if ( compareType(ele, t) ) {
-            return true;
-          }
-        });
-      }
+export var cssClass = {
+  toggle(ele, name) {
+    if ( hasClass(ele, name) ) {
+      rmClass(ele, name);
       return false;
-    } 
+    } else {
+      addClass(ele, name);
+      return true;
+    }
   }
-  
-, append    : appendEle
-, add       : appendEle
-, rm        : removeEle
-, remove    : removeEle
-, findParent: findParentEle
-, parentNode: findParentEle
 
-};
+, has(ele, name) {
+    return ele.className.indexOf(name) > -1;
+  }
 
-export default dom;
+, add(ele, name) {
+    ele.classList.add(name);
+  }
+
+, remove(ele, name) {
+    ele.classList.remove(name);
+  }
+}
+
+export function compareType(ele, type) {
+  if ( type ) {
+    if ( isStr(type) ) {
+      return ele.parentNode.tagName.toLowerCase() === type.toLowerCase();
+    } else if ( isArr(type) || isObj(type) ) {
+      each(type, (t) => {
+        if ( compareType(ele, t) ) {
+          return true;
+        }
+      });
+    }
+    return false;
+  }
+}
+
+export function getDimensions(ele) {
+  var dimensions = {
+    height: outerHeight(ele)
+  , width: outerWidth(ele)
+  };
+  return dimensions;
+}
+/*
+ * Gets the outer Height of divs, including margin
+ */
+export function outerHeight(el) {
+  // Get the DOM Node if you pass in a string
+  el = (typeof el === 'string') ? document.querySelector(el) : el; 
+  if ( ! el ) { return -1; }
+
+  var styles = window.getComputedStyle(el);
+  var margin = parseFloat(styles['marginTop']) +
+               parseFloat(styles['marginBottom']);
+
+  return Math.ceil(el.offsetHeight + margin);
+}
+
+/*
+ * Gets the outer Width of divs, including margin
+ */
+export function outerWidth(el) {
+  // Get the DOM Node if you pass in a string
+  el = (typeof el === 'string') ? document.querySelector(el) : el; 
+  if ( ! el ) { return -1; }
+
+  var styles = window.getComputedStyle(el);
+  var margin = parseFloat(styles['marginLeft']) +
+               parseFloat(styles['marginRight']);
+
+  return Math.ceil(el.offsetWidth + margin);
+}
